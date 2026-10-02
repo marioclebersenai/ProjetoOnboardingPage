@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ProjetoOnboardingPage.Views.OnboardingPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:ProjetoOnboardingPage.Models"
+    xmlns:viewmodels="clr-namespace:ProjetoOnboardingPage.ViewModels"
+    Title="OnboardingPage"
+    BackgroundColor="#D0D0D0"
+    x:DataType="viewmodels:OnboardingViewModel"
+    Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="*,Auto">
+        <CarouselView IndicatorView="Indicador"
+                      Loop="False"
+            Grid.Row="0"
+            ItemsSource="{Binding Items}"
+            Position="{Binding Position}">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:OnBoardingItem">
+
+                    <VerticalStackLayout Padding="30,0"
+                                         VerticalOptions="Center"
+                                         Spacing="20">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="28"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding Titulo}"
+                            TextColor="#333333" />
+
+                        <Label
+                            FontSize="18"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding Descricao}"
+                            TextColor="#666666" />
+
+                        <Image Source="{Binding ImagemUrl}"
+                               Aspect="AspectFit"
+                               HorizontalOptions="Center"
+                               HeightRequest="250"/>
+
+                    </VerticalStackLayout>
+
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+
+        </CarouselView>
+
+        <VerticalStackLayout Grid.Row="1">
+            <IndicatorView x:Name="Indicador"
+                           HorizontalOptions="Center"
+                           IndicatorColor="#FFF"
+                           SelectedIndicatorColor="#80C46B"
+                           IndicatorSize="12"
+                           />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="15">
+                <Button Grid.Column="0"
+                        Grid.ColumnSpan="{Binding SpanGrid}"
+                        BackgroundColor="#80C46B"
+                        CornerRadius="15"
+                        Text="Join us Now"
+                        TextColor="#FFF"
+                        FontAttributes="Bold"
+                        />
+
+                <Button Grid.Column="1"
+                        BackgroundColor="#FFF"
+                        BorderColor="#DDD"
+                        BorderWidth="1"
+                        CornerRadius="15"
+                        Text="Next"
+                        Command="{Binding NextCommand}"
+                        TextColor="#555"
+                        IsVisible="{Binding ShowButton}"
+                        />
+            </Grid>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
